@@ -11,15 +11,6 @@ public class Product {
     public Product() {
     }
 
-    public Product(String name, Price price) {
-        this.name = name;
-        this.price = price;
-    }
-
-    public Product(BarCode barCode) {
-        this.barCode = barCode;
-    }
-
     public Product(String name, Price price, BarCode barCode) {
         this.name = name;
         this.price = price;
@@ -67,19 +58,4 @@ public class Product {
     public void setPrice(Price price) {
         this.price = price;
     }
-
-
-    public static class Price {
-        private double price;
-
-        public Price(double price) {
-            this.price = price;
-        }
-
-        public double getPrice() {
-            return price;
-        }
-
-    }
-
 }

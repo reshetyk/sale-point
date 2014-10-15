@@ -1,4 +1,6 @@
-package domain;
+package domain.device.output;
+
+import domain.device.Device;
 
 /**
  * @author Alexey

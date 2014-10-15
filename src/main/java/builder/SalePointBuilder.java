@@ -1,6 +1,10 @@
 package builder;
 
-import domain.*;
+import domain.ProductStorage;
+import domain.device.input.impl.BarCodesScanner;
+import domain.device.output.impl.LcdDisplay;
+import domain.device.output.impl.Printer;
+import service.SalePointImpl;
 
 /**
  * @author Alexey

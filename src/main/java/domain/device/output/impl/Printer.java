@@ -1,9 +1,11 @@
-package domain;
+package domain.device.output.impl;
+
+import domain.device.output.OutputDevice;
 
 /**
  * @author Alexey
  */
-public class Printer implements OutputDevice<String>{
+public class Printer implements OutputDevice<String> {
     private final StringBuilder stringBuilder = new StringBuilder();
     @Override
     public void write(String string) {

@@ -1,4 +1,4 @@
-package domain;
+package domain.device;
 
 /**
  * @author Alexey

@@ -1,4 +1,8 @@
-package domain;
+package service;
+
+import domain.device.Device;
+import domain.device.input.InputDevice;
+import domain.device.output.OutputDevice;
 
 import java.util.Set;
 
@@ -12,7 +16,7 @@ public interface SalePoint {
 
     Device getDevice(Class<? extends Device> deviceClass);
 
-    void doScan(String barCode);
+    void scanAndFindInDbAndShowStatusOnLcd(String barCode);
 
     void exit();
 }

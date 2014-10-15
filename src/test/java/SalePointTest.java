@@ -1,6 +1,14 @@
 import builder.SalePointBuilder;
-import domain.*;
+import domain.BarCode;
+import domain.Price;
+import domain.Product;
+import domain.ProductStorage;
+import domain.device.input.impl.BarCodesScanner;
+import domain.device.output.impl.LcdDisplay;
+import domain.device.output.impl.Printer;
+import org.junit.Before;
 import org.junit.Test;
+import service.SalePointImpl;
 
 import java.util.Arrays;
 
@@ -12,11 +20,17 @@ import static org.junit.Assert.assertThat;
  * @author Alexey
  */
 public class SalePointTest {
-    static final ProductStorage productStorage = new ProductStorage(Arrays.asList(
-            new Product("Butter", new Product.Price(11.0), new BarCode("111")),
-            new Product("Beer", new Product.Price(33.6), new BarCode("222")),
-            new Product("Milk", new Product.Price(20.83), new BarCode("333")))
-    );
+
+    private ProductStorage productStorage;
+
+    @Before
+    public void setUp() throws Exception {
+        productStorage = new ProductStorage(Arrays.asList(
+                new Product("Butter", new Price(11.0), new BarCode("111")),
+                new Product("Beer", new Price(33.6), new BarCode("222")),
+                new Product("Milk", new Price(20.83), new BarCode("333")))
+        );
+    }
 
     /**
      * Check that sale point has one input device
@@ -64,7 +78,7 @@ public class SalePointTest {
     @Test
     public void ifProductFoundThanNameAndPricePrintedOnLcdDisplay() {
         SalePointImpl salePoint = SalePointBuilder.build(productStorage);
-        salePoint.doScan("111");
+        salePoint.scanAndFindInDbAndShowStatusOnLcd("111");
         final LcdDisplay lcdDisplay = (LcdDisplay) salePoint.getDevice(LcdDisplay.class);
         assertEquals("Butter : 11.0", lcdDisplay.getOut());
     }
@@ -77,7 +91,7 @@ public class SalePointTest {
     @Test
     public void ifProductNotFoundThanErrorMessageOnLcdDisplay() {
         SalePointImpl salePoint = SalePointBuilder.build(productStorage);
-        salePoint.doScan("0000");
+        salePoint.scanAndFindInDbAndShowStatusOnLcd("0000");
         final LcdDisplay lcdDisplay = (LcdDisplay) salePoint.getDevice(LcdDisplay.class);
         assertEquals("Product not found", lcdDisplay.getOut());
     }
@@ -88,7 +102,7 @@ public class SalePointTest {
     @Test
     public void ifCodeScannedIsEmptyThanErrorMessageOnLcdDisplay() {
         SalePointImpl salePoint = SalePointBuilder.build(productStorage);
-        salePoint.doScan("");
+        salePoint.scanAndFindInDbAndShowStatusOnLcd("");
         final LcdDisplay lcdDisplay = (LcdDisplay) salePoint.getDevice(LcdDisplay.class);
         assertEquals("Invalid bar-code", lcdDisplay.getOut());
     }
@@ -101,8 +115,8 @@ public class SalePointTest {
     @Test
     public void whenExitInputThanReceiptWithAllScannedItemsPrintedOnPrinter() {
         SalePointImpl salePoint = SalePointBuilder.build(productStorage);
-        salePoint.doScan("111");
-        salePoint.doScan("222");
+        salePoint.scanAndFindInDbAndShowStatusOnLcd("111");
+        salePoint.scanAndFindInDbAndShowStatusOnLcd("222");
         salePoint.exit();
         final LcdDisplay lcdDisplay = (LcdDisplay) salePoint.getDevice(LcdDisplay.class);
         final Printer printer = (Printer) salePoint.getDevice(Printer.class);

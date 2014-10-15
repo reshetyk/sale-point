@@ -24,9 +24,9 @@ public class Receipt implements Iterable<Receipt.Item>{
      */
     public static class Item {
         private String name;
-        private double price;
+        private Price price;
 
-        public Item(String name, Double price) {
+        public Item(String name, Price price) {
             this.name = name;
             this.price = price;
         }
@@ -35,7 +35,7 @@ public class Receipt implements Iterable<Receipt.Item>{
             return name;
         }
 
-        public Double getPrice() {
+        public Price getPrice() {
             return price;
         }
     }
