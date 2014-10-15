@@ -10,7 +10,7 @@ public class ReceiptSerializer {
     public static String serializeAsString(Receipt receipt) {
         StringBuilder stringBuilder = new StringBuilder();
         for (Receipt.Item item : receipt) {
-            stringBuilder.append(serializeReceiptItemAsString(item) + "\n");
+            stringBuilder.append(serializeReceiptItemAsString(item)).append('\n');
         }
         return stringBuilder.toString();
     }

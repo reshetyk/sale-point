@@ -4,7 +4,7 @@ package domain;
  * @author Alexey
  */
 public class Price {
-    private double price;
+    private final double price;
 
     public Price(double price) {
         this.price = price;

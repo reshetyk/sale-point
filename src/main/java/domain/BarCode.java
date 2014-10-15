@@ -4,7 +4,7 @@ package domain;
  * @author Alexey
  */
 public class BarCode {
-    private String barCode;
+    private final String barCode;
 
     public BarCode(String barCode) {
         this.barCode = barCode;

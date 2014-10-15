@@ -23,8 +23,8 @@ public class Receipt implements Iterable<Receipt.Item>{
      * @author Alexey
      */
     public static class Item {
-        private String name;
-        private Price price;
+        private final String name;
+        private final Price price;
 
         public Item(String name, Price price) {
             this.name = name;
