@@ -3,33 +3,30 @@ package service;
 import builder.ReceiptBuilder;
 import domain.BarCode;
 import domain.Product;
-import domain.ProductStorage;
 import domain.Receipt;
 import domain.device.Device;
+import domain.device.input.BarCodesScanner;
 import domain.device.input.InputDevice;
-import domain.device.input.impl.BarCodesScanner;
+import domain.device.output.LcdDisplay;
 import domain.device.output.OutputDevice;
-import domain.device.output.impl.LcdDisplay;
-import domain.device.output.impl.Printer;
+import domain.device.output.Printer;
 import exception.InvalidBarCodeException;
 import serializer.ReceiptSerializer;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 
 /**
  * @author Alexey
  */
 public class SalePointImpl implements SalePoint {
-    private final Set<InputDevice> inputDevices = new HashSet<InputDevice>();
-    private final Set<OutputDevice> outputDevices = new HashSet<OutputDevice>();
-    private final ProductStorage productStorage;
+    private final ProductService productService;
+    private final Collection<InputDevice> inputDevices = new ArrayList<>();
+    private final Collection<OutputDevice> outputDevices = new ArrayList<>();
     private final ReceiptBuilder receiptBuilder = new ReceiptBuilder();
 
-    public SalePointImpl(ProductStorage productStorage) {
-        this.productStorage = productStorage;
+    public SalePointImpl(ProductService productService) {
+        this.productService = productService;
     }
 
     @Override
@@ -38,7 +35,7 @@ public class SalePointImpl implements SalePoint {
         LcdDisplay lcdDisplay = (LcdDisplay) getDevice(LcdDisplay.class);
         String displayMessage;
         try {
-            final Product product = findProductByBarCode(barCodesScanner.read(sBarCode));
+            final Product product = productService.findProductByBarCode(barCodesScanner.read(sBarCode));
             displayMessage = "Product not found";
             if (product != null) {
                 final Receipt.Item item = new Receipt.Item(product.getName(), product.getPrice());
@@ -58,13 +55,13 @@ public class SalePointImpl implements SalePoint {
     }
 
     @Override
-    public Set<InputDevice> getInputDevices() {
-        return Collections.unmodifiableSet(inputDevices);
+    public Collection<InputDevice> getInputDevices() {
+        return Collections.unmodifiableCollection(inputDevices);
     }
 
     @Override
-    public Set<OutputDevice> getOutputDevices() {
-        return Collections.unmodifiableSet(outputDevices);
+    public Collection<OutputDevice> getOutputDevices() {
+        return Collections.unmodifiableCollection(outputDevices);
     }
 
     //TODO: can return list of devices
@@ -100,15 +97,5 @@ public class SalePointImpl implements SalePoint {
 
     private void writeTotalOfReceipt(OutputDevice<String> outputDevice, Receipt receipt) {
         outputDevice.write("Total : " + ReceiptCalculator.countTotal(receipt));
-    }
-
-    //TODO: extract to Service method
-    protected Product findProductByBarCode(BarCode barCode) {
-        for (Product product : productStorage) {
-            if (product.getBarCode() != null && barCode != null && product.getBarCode().equals(barCode)) {
-                return product;
-            }
-        }
-        return null;
     }
 }

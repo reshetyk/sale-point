@@ -1,9 +1,9 @@
 package builder;
 
 import domain.ProductStorage;
-import domain.device.input.impl.BarCodesScanner;
-import domain.device.output.impl.LcdDisplay;
-import domain.device.output.impl.Printer;
+import domain.device.input.BarCodesScanner;
+import domain.device.output.LcdDisplay;
+import domain.device.output.Printer;
 import service.SalePointImpl;
 
 /**

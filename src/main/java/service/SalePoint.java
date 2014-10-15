@@ -4,15 +4,16 @@ import domain.device.Device;
 import domain.device.input.InputDevice;
 import domain.device.output.OutputDevice;
 
+import java.util.Collection;
 import java.util.Set;
 
 /**
  * @author Alexey
  */
 public interface SalePoint {
-    Set<InputDevice> getInputDevices();
+    Collection<InputDevice> getInputDevices();
 
-    Set<OutputDevice> getOutputDevices();
+    Collection<OutputDevice> getOutputDevices();
 
     Device getDevice(Class<? extends Device> deviceClass);
 

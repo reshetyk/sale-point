@@ -1,4 +1,4 @@
-package domain.device.input.impl;
+package domain.device.input;
 
 import domain.BarCode;
 import domain.device.input.InputDevice;
@@ -7,7 +7,7 @@ import exception.InvalidBarCodeException;
 /**
  * @author Alexey
  */
-public class BarCodesScanner implements InputDevice<String> {
+public class BarCodesScanner implements InputDevice<String, BarCode> {
 
     @Override
     public BarCode read(String barCode) throws InvalidBarCodeException {

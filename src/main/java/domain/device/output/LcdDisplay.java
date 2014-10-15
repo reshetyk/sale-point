@@ -1,4 +1,4 @@
-package domain.device.output.impl;
+package domain.device.output;
 
 import domain.device.output.OutputDevice;
 

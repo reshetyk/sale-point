@@ -6,6 +6,6 @@ import domain.device.Device;
 /**
  * @author Alexey
  */
-public interface InputDevice<T> extends Device {
-    Object read(T object) throws Exception;
+public interface InputDevice<InputType, OutputType> extends Device {
+    OutputType read(InputType object) throws Exception;
 }
