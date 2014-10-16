@@ -7,4 +7,5 @@ import domain.device.Device;
  */
 public interface OutputDevice<T> extends Device {
     void write(T object);
+    void reset();
 }

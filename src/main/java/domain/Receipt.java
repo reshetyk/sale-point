@@ -23,10 +23,12 @@ public class Receipt implements Iterable<Receipt.Item>{
      * @author Alexey
      */
     public static class Item {
+        private final BarCode barCode;
         private final String name;
         private final Price price;
 
-        public Item(String name, Price price) {
+        public Item(BarCode barCode, String name, Price price) {
+            this.barCode = barCode;
             this.name = name;
             this.price = price;
         }
@@ -37,6 +39,10 @@ public class Receipt implements Iterable<Receipt.Item>{
 
         public Price getPrice() {
             return price;
+        }
+
+        public BarCode getBarCode() {
+            return barCode;
         }
     }
 

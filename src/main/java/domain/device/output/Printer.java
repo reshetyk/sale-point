@@ -1,7 +1,5 @@
 package domain.device.output;
 
-import domain.device.output.OutputDevice;
-
 /**
  * @author Alexey
  */
@@ -10,6 +8,11 @@ public class Printer implements OutputDevice<String> {
     @Override
     public void write(String string) {
         stringBuilder.append(string);
+    }
+
+    @Override
+    public void reset() {
+        stringBuilder.setLength(0);
     }
 
     public String getOut() {

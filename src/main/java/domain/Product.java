@@ -8,9 +8,6 @@ public class Product {
     private Price price;
     private BarCode barCode;
 
-    public Product() {
-    }
-
     public Product(String name, Price price, BarCode barCode) {
         this.name = name;
         this.price = price;
@@ -20,10 +17,6 @@ public class Product {
 
     public BarCode getBarCode() {
         return barCode;
-    }
-
-    public void setBarCode(BarCode barCode) {
-        this.barCode = barCode;
     }
 
     @Override
@@ -47,15 +40,7 @@ public class Product {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public Price getPrice() {
         return price;
-    }
-
-    public void setPrice(Price price) {
-        this.price = price;
     }
 }

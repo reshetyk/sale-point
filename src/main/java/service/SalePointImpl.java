@@ -35,10 +35,11 @@ public class SalePointImpl implements SalePoint {
         LcdDisplay lcdDisplay = (LcdDisplay) getDevice(LcdDisplay.class);
         String displayMessage;
         try {
-            final Product product = productService.findProductByBarCode(barCodesScanner.read(sBarCode));
+            final BarCode barCode = barCodesScanner.read(sBarCode);
+            final Product product = productService.findProductByBarCode(barCode);
             displayMessage = "Product not found";
             if (product != null) {
-                final Receipt.Item item = new Receipt.Item(product.getName(), product.getPrice());
+                final Receipt.Item item = new Receipt.Item(barCode, product.getName(), product.getPrice());
                 receiptBuilder.append(item);
                 displayMessage = ReceiptSerializer.serializeReceiptItemAsString(item);
             }

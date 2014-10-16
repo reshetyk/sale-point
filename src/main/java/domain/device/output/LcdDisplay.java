@@ -1,7 +1,5 @@
 package domain.device.output;
 
-import domain.device.output.OutputDevice;
-
 /**
  * @author Alexey
  */
@@ -11,6 +9,11 @@ public class LcdDisplay implements OutputDevice<String> {
     @Override
     public void write(String message) {
         out.append(message).append('\n');
+    }
+
+    @Override
+    public void reset() {
+        out.setLength(0);
     }
 
     public String getOut() {

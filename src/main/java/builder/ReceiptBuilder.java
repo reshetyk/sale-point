@@ -15,8 +15,13 @@ public class ReceiptBuilder {
         receiptItems.add(item);
         return this;
     }
-    public Receipt build () {
+
+    public Receipt build() {
         return new Receipt(receiptItems);
+    }
+
+    public void reset() {
+        receiptItems.clear();
     }
 
 }

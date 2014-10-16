@@ -117,11 +117,12 @@ public class SalePointTest {
         SalePointImpl salePoint = SalePointBuilder.build(productStorage);
         salePoint.scanAndFindInDbAndShowStatusOnLcd("111");
         salePoint.scanAndFindInDbAndShowStatusOnLcd("222");
+        salePoint.scanAndFindInDbAndShowStatusOnLcd("333");
         salePoint.exit();
         final LcdDisplay lcdDisplay = (LcdDisplay) salePoint.getDevice(LcdDisplay.class);
         final Printer printer = (Printer) salePoint.getDevice(Printer.class);
-        assertEquals("Butter : 11.0\nBeer : 33.6\nTotal : 44.6", lcdDisplay.getOut());
-        assertEquals("Butter : 11.0\nBeer : 33.6\nTotal : 44.6", printer.getOut());
+        assertEquals("Butter : 11.0\nBeer : 33.6\nMilk : 20.83\nTotal : 65.43", lcdDisplay.getOut());
+        assertEquals("Butter : 11.0\nBeer : 33.6\nMilk : 20.83\nTotal : 65.43", printer.getOut());
     }
 
 }
